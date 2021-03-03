@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+</head>
+
+<body>
+  <script>
+    AFRAME.registerComponent('scale-on-mouseenter', {
+      schema: {
+        to: {
+          default: '2.5 2.5 2.5',
+          type: 'vec3'
+        }
+      },
+
+      init: function() {
+        var data = this.data;
+        var el = this.el;
+        this.el.addEventListener('mouseenter', function() {
+          el.object3D.scale.copy(data.to);
+        });
+      }
+    });
+  </script>
+
+  <a-scene fog="type: linear;  color: #000; far: 30; near: 0 ">
+    <!-- <a-box color="blue" position = "0 2 -5" rotation="0 45 45" scale="2 2 2"></a-box> -->
+    <a-assets>
+      <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
+      <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+      <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+      <img id="start-image" src='images/intro_proj_desc.png'>
+    </a-assets>
+    <!-- <a-box src="https://i.imgur.com/mYmmbrp.jpg" position="0 2 -5" rotation="0 45 45"
+    scale="2 2 2"></a-box> -->
+
+    <!-- <a-scene fog="type: linear;  color: #000; far: 30; near: 0 "></a-scene> -->
+
+    <a-box src="#skyTexture" position="5 2 -5" rotation="0 45 45" scale="2 2 2" animation="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true"></a-box>
+
+    <a-sphere color = "blue" position="1 4 5"></a-sphere>
+
+    <a-image src="#start-image" width="2" height="1.5"position="0 2 -4" scale="2 2 2"></a-image>
+    <!-- <a-sky color="#222"></a-sky> -->
+    <!-- <a-sky src="#skyTexture"></a-sky> -->
+    <!-- <a-plane rotation="-90 0 0" width="30" height="30"></a-plane> -->
+    <!-- <a-plane src="#groundTexture" rotation="-90 0 0" width="30" height="30" repeat="10 10"></a-plane> -->
+
+    <!-- <a-light type="ambient" color="#445451"></a-light> -->
+    <!-- <a-light type="point" intensity="1" position="2 4 4"></a-light> -->
+
+
+
+    <a-entity environment="groundColor2:#292929;groundColor:#612821;groundTexture:walkernoise;preset:dream;active:true;seed:17;skyType:gradient;skyColor:#87faf4;horizonColor:#13593e;lightPosition:-0.72 0.53 0.97;fog:0.85;groundYScale:20;dressingAmount:0;gridColor:#239893" preset-switcher="" id="environment" position="-1.957 0 0">
+      <a-entity class="environment" position="0 50 0" light="intensity:0.6;color:#c3fcf9;type:hemisphere"></a-entity>
+    <a-entity class="environment" position="-0.72 0.53 0.97" light="shadowCameraLeft:-10;shadowCameraBottom:-10;shadowCameraRight:10;shadowCameraTop:10;intensity:0.6"></a-entity>
+    <a-entity rotation="-90 0 0" class="environmentGround environment" scale="1 1 20" shadow="cast:false;receive:false"></a-entity>
+    <a-entity class="environmentDressing environment" visible="false"></a-entity>
+    <!-- <a-sky radius="200" theta-length="110" class="environment" geometry="" material="npot:false;shader:gradientshader;topColor:#87faf4;bottomColor:#b34093"></a-sky> -->
+    <a-entity id="stars" visible="true"></a-entity></a-entity>
+    <!-- <a-camera>
+      <a-cursor></a-cursor>
+    </a-camera> -->
+
+    <!-- Out of the box environment! -->
+    <!-- <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> -->
+
+  </a-scene>
+</body>
+
+</html>
